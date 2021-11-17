@@ -1,0 +1,44 @@
+
+<div class="right">
+    <small> (by <%= quiz.author ? quiz.author.displayName : "Anonymous" %>) </small>
+</div>
+
+<h1>
+    Play:
+</h1>
+
+<form method="get" action="/quizzes/<%= quiz.id %>/check">
+
+
+    <div class="quizItem">
+
+        <div>
+            <% var attachment = quiz.attachment; %>
+            <% include ../attachments/_show %>
+        </div>
+
+        <div>
+            <% include ../favourites/_stars.ejs %>
+            <br/>
+            <b><%= quiz.question %></b>
+
+            <div class="wideRow">
+                <input type="text" class="itemWide" name="answer" value="<%= answer %>" placeholder="Answer" autocomplete="off"/>
+                <input type="submit" class="itemNarrow" value="Check">
+            </div>
+        </div>
+
+        <div>
+            <% if (quiz.author && quiz.author.photo) { %>
+                <img class="miniphoto" src="<%= quiz.author.photo.url %>"/>
+            <% } else { %>
+                <img class="miniphoto" src="/images/face.png"/>
+            <% } %>
+            <br />
+            <small> <%= quiz.author ? quiz.author.displayName : "Anonymous" %> </small>
+        </div>
+    </div>
+
+</form>
+
+<a href="/goback" class="button">Go back</a>
